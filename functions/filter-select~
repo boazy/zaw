@@ -486,7 +486,7 @@ function filter-select() {
         reply=()
         reply_marked=()
         ret=1
-
+        
     elif (( ${#displays} == 0 )); then
         # no candidate matches pattern (no candidate selected)
         reply=()
