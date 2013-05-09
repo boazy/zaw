@@ -212,5 +212,7 @@ filter-select -i
 bindkey -M filterselect '^i' select-action
 
 bindkey '^X;' zaw
+bindkey '^H'  zaw-history
+bindkey '^Y'  zaw-z
 
 }
