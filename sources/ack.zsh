@@ -6,7 +6,9 @@
 
 zmodload zsh/parameter
 
-if (( $+commands[ack] )); then
+if (( $+commands[ag] )); then
+    ACK_COMMAND="ag"
+elif (( $+commands[ack] )); then
     ACK_COMMAND="ack"
 elif (( $+commands[ack-grep] )); then
     ACK_COMMAND="ack-grep"
