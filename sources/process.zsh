@@ -3,7 +3,7 @@
 function zaw-src-process () {
     local ps_list title ps pid_list
     if [ $(uname) = "Darwin" ] ; then       # for Macintosh
-        ps_list="$(ps aux | awk '$11 !~ /^\[/ {print $0}')"              # filter out kernel processes
+        ps_list="$(ps -axm -o pid,%cpu,%mem,rss,command | awk '$11 !~ /^\[/ {print $0}')"              # filter out kernel processes
     else
         ps_list="$(ps -aux --sort args | awk '$11 !~ /^\[/ {print $0}')" # filter out kernel processes
     fi
