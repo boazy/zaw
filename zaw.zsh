@@ -216,6 +216,7 @@ function select-action() {}; zle -N select-action
 filter-select -i
 bindkey -M filterselect '^i' select-action
 
+bindkey '^L'  zaw
 bindkey '^X;' zaw
 bindkey '^H'  zaw-history
 bindkey '^Y'  zaw-z
