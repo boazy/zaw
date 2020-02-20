@@ -3,13 +3,13 @@
 function zaw-src-process () {
     local ps_list title ps pid_list
     if [ $(uname) = "Darwin" ] ; then       # for Macintosh
-        ps_list="$(ps -axm -o pid,%cpu,%mem,rss,command | awk '$11 !~ /^\[/ {print $0}')"              # filter out kernel processes
+        ps_list="$(ps ax -o pid,%cpu,%mem,rss,command | (read -r; printf "%s\n" "$REPLY"; sort -k 5) | awk '$5 !~ /^\[/ {print $0}')"              # filter out kernel processes
     else
-        ps_list="$(ps -aux --sort args | awk '$11 !~ /^\[/ {print $0}')" # filter out kernel processes
+        ps_list="$(ps ax -o pid,%cpu,%mem,rss,command --sort command | awk '$5 !~ /^\[/ {print $0}')" # filter out kernel processes
     fi
     title="${${(f)ps_list}[1]}"
     ps="$(echo $ps_list | sed '1d')"
-    pid_list="$(echo $ps | awk '{print $2}')"
+    pid_list="$(echo $ps | awk '{print $1}')"
     : ${(A)candidates::=${(f)pid_list}}
     : ${(A)cand_descriptions::=${(f)ps}}
     actions=(zaw-callback-append-to-buffer zaw-src-process-kill)
